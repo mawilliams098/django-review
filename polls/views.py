@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 
 from .models import Question
@@ -18,6 +18,10 @@ Each view is responsible for returning an HttpResponse object.
 Each view is responsible for doing one of two things: returning an HttpResponse object 
 containing the content for the requested page, or raising an exception such as Http404. 
 The rest is up to you.
+
+1. load a template
+2. fill a context
+3. return an HttpResponse
 """
 
 # to call the view, map it to a url in polls/urls.py
@@ -27,10 +31,7 @@ def index(request):
     return render(request, 'polls/index.html', context) # render returns an HttpResponse
 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
     
 def results(request, question_id):

@@ -5,10 +5,9 @@ from . import views
 """
 To get from a URL to a view, Django uses what are known as ‘URLconfs’. 
 A URLconf maps URL patterns to views.
-This tutorial provides basic instruction in the use of URLconfs, 
-and you can refer to URL dispatcher for more information.
 """
 
+app_name = 'polls'
 urlpatterns = [
     # ex: /polls/
     path('', views.index, name='index'),
